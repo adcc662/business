@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    depends_on:
+      - businesspizza-postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://businesspizza-postgres:5432/businesspizza
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+
+  businesspizza-postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: businesspizza
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - businesspizza_data:/var/lib/postgresql/data
+
+volumes:
+  businesspizza_data:
