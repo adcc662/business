@@ -1,6 +1,6 @@
 FROM openjdk:21-slim
 
-CMD ["./gradlew build"]
+CMD ["./gradlew", "build"]
 
 ARG JAR_FILE=build/libs/*.jar
 
